@@ -53,7 +53,9 @@ dependencies {
 //    Firebase
     implementation 'com.google.firebase:firebase-messaging:23.1.0'
     implementation 'com.google.firebase:firebase-firestore:24.4.1'
+
     /*MultiDex*/
+    /*Android 应用程序在 Dalvik 虚拟机上突破 65,536 方法数限制*/
     implementation('androidx.multidex:multidex:2.0.1')
 
 }

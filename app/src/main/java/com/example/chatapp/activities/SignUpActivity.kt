@@ -33,9 +33,9 @@ class SignUpActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        preferenceManager = PreferenceManager.getInstance(applicationContext)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        preferenceManager = PreferenceManager(applicationContext)
         setListeners()
     }
 
@@ -71,20 +71,20 @@ class SignUpActivity : AppCompatActivity() {
         loading(true)
         val database = FirebaseFirestore.getInstance()
         val user = HashMap<String, Any>()
-        user.put(Constants().KEY_NAME, binding.inputName.textToString())
-        user.put(Constants().KEY_EMAIL, binding.inputEmail.textToString())
-        user.put(Constants().KEY_PASSWORD, binding.inputPassword.textToString())
-        user.put(Constants().KEY_IMAGE, encodedImage)
-        database.collection(Constants().KEY_COLLECTION_USERS)
+        user.put(Constants.KEY_NAME, binding.inputName.textToString())
+        user.put(Constants.KEY_EMAIL, binding.inputEmail.textToString())
+        user.put(Constants.KEY_PASSWORD, binding.inputPassword.textToString())
+        user.put(Constants.KEY_IMAGE, encodedImage)
+        database.collection(Constants.KEY_COLLECTION_USERS)
             .add(user)
             .addOnSuccessListener {
                 MyLog.v("---------Success---------")
                 loading(false)
                 MyLog.v("${binding.progressBar.isVisible}")
-                preferenceManager.putBoolean(Constants().KEY_IS_SIGNED_IN, true)
-                preferenceManager.putString(Constants().KEY_USER_ID, it.id)
-                preferenceManager.putString(Constants().KEY_NAME, binding.inputName.textToString())
-                preferenceManager.putString(Constants().KEY_IMAGE, encodedImage)
+                preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN, true)
+                preferenceManager.putString(Constants.KEY_USER_ID, it.id)
+                preferenceManager.putString(Constants.KEY_NAME, binding.inputName.textToString())
+                preferenceManager.putString(Constants.KEY_IMAGE, encodedImage)
                 val intent = Intent(applicationContext, MainActivity::class.java)
 //                新启一个 并清空任务栈
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
@@ -114,7 +114,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private val pickImage = registerForActivityResult(
-        //StartActivityForResult 用于启动任意意图（Intent），并且期望从那个 Activity 获取结果
+        //StartActivityForResult 用于启动任意意图（Intent）,并且期望从那个 Activity 获取结果
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         if (result.resultCode == RESULT_OK) {
