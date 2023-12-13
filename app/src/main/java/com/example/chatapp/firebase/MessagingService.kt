@@ -1,6 +1,5 @@
 package com.example.chatapp.firebase
 
-import android.util.Log
 import com.example.chatapp.utils.MyLog
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage

@@ -18,6 +18,8 @@ import com.example.chatapp.databinding.ActivitySignUpBinding
 import com.example.chatapp.untilities.Constants
 import com.example.chatapp.untilities.PreferenceManager
 import com.example.chatapp.utils.MyLog
+import com.example.chatapp.utils.showToastLong
+import com.example.chatapp.utils.showToastShort
 import com.example.chatapp.utils.textToString
 import com.example.chatapp.utils.textToStringAndTrim
 import com.google.android.material.internal.ViewUtils.dpToPx
@@ -57,14 +59,6 @@ class SignUpActivity : AppCompatActivity() {
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             pickImage.launch(intent)
         }
-    }
-
-    private fun showToastShort(message: String) {
-        Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
-    }
-
-    private fun showToastLong(message: String) {
-        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
     }
 
     private fun signUp() {

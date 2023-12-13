@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.chatapp.databinding.ActivitySignInBinding
 import com.example.chatapp.untilities.Constants
 import com.example.chatapp.untilities.PreferenceManager
+import com.example.chatapp.utils.showToastShort
 import com.example.chatapp.utils.textToString
 import com.example.chatapp.utils.textToStringAndTrim
 import com.google.firebase.firestore.FirebaseFirestore
@@ -38,10 +39,6 @@ class SignInActivity : AppCompatActivity() {
                 signIn()
             }
         }
-    }
-
-    private fun showToastShort(message: String) {
-        Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun signIn() {
