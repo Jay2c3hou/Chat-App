@@ -42,7 +42,7 @@ class UserActivity : AppCompatActivity() {
                 if (task.isSuccessful && task.result != null) {
                     val users = ArrayList<User>()
                     for (queryDocumentSnapshot in task.result) {
-//                       如果其 ID 不等于当前用户的 ID，则创建一个新的 User 对象
+//                       如果其 ID 不等于当前用户的 ID，则创建一个新的 User 对象,也就是说 不显示当前登入的用户
                         if (currentUserId == queryDocumentSnapshot.id) continue
                         val user = User()
                         user.name =
@@ -56,7 +56,8 @@ class UserActivity : AppCompatActivity() {
                         users.add(user)
                     }
                     if (users.size > 0) {
-                        val userAdapter = UserAdapter(users)
+                        val userAdapter = UserAdapter()
+                        userAdapter.setData(users)
                         binding.userRecyclerView.adapter = userAdapter
                         binding.userRecyclerView.visibility = View.VISIBLE
                     } else

@@ -1,5 +1,6 @@
 package com.example.chatapp.adapters
 
+import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Base64
@@ -9,11 +10,11 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.chatapp.databinding.ItemContainerUserBinding
 import com.example.chatapp.models.User
+import com.example.chatapp.utils.MyLog
 
-class UserAdapter(users: List<User>) : Adapter<UserAdapter.UserViewHolder>() {
+class UserAdapter : Adapter<UserAdapter.UserViewHolder>() {
 
-    private var users = emptyArray<User>()
-
+    private var users = emptyList<User>()
     private fun getUserImage(encodedImage: String): Bitmap {
         /*解码  Base64 编码是一种将二进制数据转换成 ASCII 字符串的编码方式*/
         val bytes = Base64.decode(encodedImage, Base64.DEFAULT)
@@ -27,16 +28,24 @@ class UserAdapter(users: List<User>) : Adapter<UserAdapter.UserViewHolder>() {
     }
 
     override fun getItemCount(): Int {
+        MyLog.v("这个是users的长度${users.size}")
         return users.size
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        holder.setUserData(users[position]){
+        holder.setUserData(users[position]) {
 
         }
     }
 
-    inner class UserViewHolder(private val binding: ItemContainerUserBinding) : ViewHolder(binding.root) {
+    @SuppressLint("NotifyDataSetChanged")
+    fun setData(data: List<User>) {
+        users = data
+        notifyDataSetChanged()
+    }
+
+    inner class UserViewHolder(private val binding: ItemContainerUserBinding) :
+        ViewHolder(binding.root) {
         fun setUserData(user: User, callback: () -> Unit = {}) {
             binding.textName.text = user.name
             binding.textEmail.text = user.email

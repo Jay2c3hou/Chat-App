@@ -69,7 +69,7 @@ class SignInActivity : AppCompatActivity() {
                     startActivity(intent)
                 }else{
                     loading(false)
-                    showToastLong("不能登入,请检查用户信息")
+                    showToastLong("登入失败,请检查用户信息")
                 }
             }
     }
