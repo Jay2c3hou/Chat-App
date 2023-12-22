@@ -27,9 +27,12 @@ class MainActivity : AppCompatActivity() {
         setListeners()
     }
 
-    private fun setListeners(){
+    private fun setListeners() {
         binding.imageSignOut.setOnClickListener {
             signOut()
+        }
+        binding.fabNewChat.setOnClickListener {
+            startActivity(Intent(applicationContext, UserActivity::class.java))
         }
     }
 
@@ -53,7 +56,6 @@ class MainActivity : AppCompatActivity() {
             preferenceManager.getString(Constants.KEY_USER_ID) ?: "defaultUserId"
         )
         documentReference.update(Constants.KEY_FCM_TOKEN, token)
-            .addOnSuccessListener { showToastShort("令牌更新成功 token update success") }
             .addOnFailureListener { showToastShort("无法更新令牌 unable updated token") }
     }
 

@@ -10,4 +10,5 @@
     <string name="name">姓名</string>
     <string name="confirm_password">确认密码</string>
     <string name="sign_up">注册</string>
+    <string name="select_user">请选择用户</string>
 </resources>
