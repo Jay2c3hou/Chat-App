@@ -26,12 +26,15 @@ class ChatActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             receiverUser = intent.getSerializableExtra(Constants.KEY_USER, User::class.java)
                 ?: User().also { MyLog.v("未能读取到用户信息") }
+            binding.textName.text = receiverUser.name
         } else {
             receiverUser = intent.getSerializableExtra(Constants.KEY_USER) as User
+            binding.textName.text = receiverUser.name
         }
+
     }
 
-    private fun setListeners(){
+    private fun setListeners() {
         binding.imageBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
