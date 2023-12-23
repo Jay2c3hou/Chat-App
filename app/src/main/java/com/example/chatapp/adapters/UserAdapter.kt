@@ -9,12 +9,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.chatapp.databinding.ItemContainerUserBinding
+import com.example.chatapp.listeners.UserListener
 import com.example.chatapp.models.User
 import com.example.chatapp.utils.MyLog
 
 class UserAdapter : Adapter<UserAdapter.UserViewHolder>() {
 
     private var users = emptyList<User>()
+
+    private var userListener: UserListener? = null
     private fun getUserImage(encodedImage: String): Bitmap {
         /*解码  Base64 编码是一种将二进制数据转换成 ASCII 字符串的编码方式*/
         val bytes = Base64.decode(encodedImage, Base64.DEFAULT)
@@ -44,12 +47,17 @@ class UserAdapter : Adapter<UserAdapter.UserViewHolder>() {
         notifyDataSetChanged()
     }
 
+    fun setUserListener(listener: UserListener) {
+        userListener = listener
+    }
+
     inner class UserViewHolder(private val binding: ItemContainerUserBinding) :
         ViewHolder(binding.root) {
         fun setUserData(user: User, callback: () -> Unit = {}) {
             binding.textName.text = user.name
             binding.textEmail.text = user.email
             binding.imageProfile.setImageBitmap(getUserImage(user.image))
+            binding.root.setOnClickListener { userListener?.onUserClicked(user) }
             callback()
         }
     }

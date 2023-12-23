@@ -12,4 +12,6 @@ object Constants {
 
     //    FCM
     const val KEY_FCM_TOKEN = "fcmToken"
+
+    const val KEY_USER = "user"
 }

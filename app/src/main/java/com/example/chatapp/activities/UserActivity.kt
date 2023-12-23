@@ -1,17 +1,19 @@
 package com.example.chatapp.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.example.chatapp.R
 import com.example.chatapp.adapters.UserAdapter
 import com.example.chatapp.databinding.ActivityUserBinding
+import com.example.chatapp.listeners.UserListener
 import com.example.chatapp.models.User
 import com.example.chatapp.untilities.Constants
 import com.example.chatapp.untilities.PreferenceManager
 import com.google.firebase.firestore.FirebaseFirestore
 
-class UserActivity : AppCompatActivity() {
+class UserActivity : AppCompatActivity() ,UserListener{
 
     private lateinit var binding: ActivityUserBinding
     private lateinit var preferenceManager: PreferenceManager
@@ -58,6 +60,7 @@ class UserActivity : AppCompatActivity() {
                     if (users.size > 0) {
                         val userAdapter = UserAdapter()
                         userAdapter.setData(users)
+                        userAdapter.setUserListener(this)
                         binding.userRecyclerView.adapter = userAdapter
                         binding.userRecyclerView.visibility = View.VISIBLE
                     } else
@@ -74,5 +77,12 @@ class UserActivity : AppCompatActivity() {
 
     private fun loading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.INVISIBLE
+    }
+
+    override fun onUserClicked(user: User) {
+        val intent = Intent(applicationContext,ChatActivity::class.java)
+        intent.putExtra(Constants.KEY_USER,user)
+        startActivity(intent)
+        finish()
     }
 }

@@ -44,7 +44,7 @@ class SignUpActivity : AppCompatActivity() {
     private fun setListeners() {
         binding.textSignIn.setOnClickListener {
 //默认情况下，onBackPressed()方法会执行Activity的finish()方法，关闭当前Activity并返回上一个Activity
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
         }
         binding.buttonSignUp.setOnClickListener {
             if (isValidSignUpDetails()) {
