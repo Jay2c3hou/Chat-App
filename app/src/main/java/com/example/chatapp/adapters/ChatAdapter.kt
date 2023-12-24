@@ -31,28 +31,6 @@ class ChatAdapter : Adapter<ViewHolder>() {
         senderId = id
     }
 
-    inner class SentMessageViewHolder(private val binding: ItemContainerSentMessageBinding) :
-        ViewHolder(binding.root) {
-        fun setData(chatMessage: ChatMessage, callback: (ChatMessage) -> Unit) {
-            binding.textMessage.text = chatMessage.message
-            binding.textDateTime.text = chatMessage.dateTime
-            callback(chatMessage)
-        }
-    }
-
-    inner class ReceivedMessageViewHolder(private val binding: ItemContainerReceivedMessageBinding) :
-        ViewHolder(binding.root) {
-        fun setData(
-            chatMessage: ChatMessage,
-            receiverProfileImage: Bitmap,
-            callback: (ChatMessage) -> Unit
-        ) {
-            binding.textMessage.text = chatMessage.message
-            binding.textDateTime.text = chatMessage.dateTime
-            binding.imageProfile.setImageBitmap(receiverProfileImage)
-            callback(chatMessage)
-        }
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         if (viewType == VIEW_TYPE_SENT) {
@@ -95,4 +73,28 @@ class ChatAdapter : Adapter<ViewHolder>() {
             VIEW_TYPE_RECEIVED
         }
     }
+
+    inner class SentMessageViewHolder(private val binding: ItemContainerSentMessageBinding) :
+        ViewHolder(binding.root) {
+        fun setData(chatMessage: ChatMessage, callback: (ChatMessage) -> Unit) {
+            binding.textMessage.text = chatMessage.message
+            binding.textDateTime.text = chatMessage.dateTime
+            callback(chatMessage)
+        }
+    }
+
+    inner class ReceivedMessageViewHolder(private val binding: ItemContainerReceivedMessageBinding) :
+        ViewHolder(binding.root) {
+        fun setData(
+            chatMessage: ChatMessage,
+            receiverProfileImage: Bitmap,
+            callback: (ChatMessage) -> Unit
+        ) {
+            binding.textMessage.text = chatMessage.message
+            binding.textDateTime.text = chatMessage.dateTime
+            binding.imageProfile.setImageBitmap(receiverProfileImage)
+            callback(chatMessage)
+        }
+    }
+
 }

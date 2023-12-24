@@ -44,6 +44,7 @@ class SignInActivity : AppCompatActivity() {
     private fun signIn() {
         loading(true)
         val database = FirebaseFirestore.getInstance()
+        //这个就是我们远程的Firestore的表
         database.collection(Constants.KEY_COLLECTION_USERS)
 //                查询与输入的邮箱和密码匹配的用户
             .whereEqualTo(Constants.KEY_EMAIL, binding.inputEmail.textToString())

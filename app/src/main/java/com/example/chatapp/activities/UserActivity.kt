@@ -55,12 +55,15 @@ class UserActivity : AppCompatActivity() ,UserListener{
                             queryDocumentSnapshot.getString(Constants.KEY_IMAGE) ?: "errorImage"
                         user.token =
                             queryDocumentSnapshot.getString(Constants.KEY_FCM_TOKEN) ?: "errorToken"
+                        user.id =
+                            queryDocumentSnapshot.id
                         users.add(user)
                     }
                     if (users.size > 0) {
-                        val userAdapter = UserAdapter()
-                        userAdapter.setData(users)
-                        userAdapter.setUserListener(this)
+                        val userAdapter = UserAdapter().apply {
+                            setData(users)
+                            setUserListener(UserActivity())
+                        }
                         binding.userRecyclerView.adapter = userAdapter
                         binding.userRecyclerView.visibility = View.VISIBLE
                     } else
